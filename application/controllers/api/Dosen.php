@@ -4,22 +4,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require APPPATH . 'libraries/REST_Controller.php';
 require APPPATH . 'libraries/Format.php';
-class Mahasiswa extends REST_Controller{
+class Dosen extends REST_Controller{
     public function __construct(){
         parent::__construct();
-        $this->load->model('Mahasiswa_model','mhs');
+        $this->load->model('Dosen_model','mdosen');
     }
     public function index_get(){
         $id = $this->get('id');
         if ($id == null) {
-            $Mahasiswa = $this->mhs->getMahasiswa();
+            $Dosen = $this->mdosen->getDosen();
         } else{
-            $Mahasiswa = $this->mhs->getMahasiswa($id);
+            $Dosen = $this->mdosen->getDosen($id);
         }
-        if ($Mahasiswa){
+        if ($Dosen){
             $this->response([
                 'status' => true,
-                'data' =>$Mahasiswa
+                'data' =>$Dosen
             ], REST_Controller::HTTP_OK);
         } else {
             $this->response([
@@ -37,7 +37,7 @@ class Mahasiswa extends REST_Controller{
                 'message' => 'tambahkan id'
             ], REST_Controller::HTTP_BAD_REQUEST);
         } else {
-            if ($this->mhs->deleteMahasiswa($id)>0){
+            if ($this->mdosen->deleteDosen($id)>0){
                 //ok
                 $this->response([
                     'status' => true,
@@ -62,10 +62,10 @@ class Mahasiswa extends REST_Controller{
             'file' => $this->post('file')
         ];
         
-        if ($this->mhs->createMahasiswa($data)>0){
+        if ($this->mdosen->createDosen($data)>0){
             $this->response([
                 'status' => true,
-                'message' => 'Mahasiswa baru ditambahkan'
+                'message' => 'Dosen baru ditambahkan'
             ], REST_Controller::HTTP_CREATED);
         } else {
             $this->response([
@@ -85,15 +85,15 @@ class Mahasiswa extends REST_Controller{
             'file' => $this->put('file')
         ];
 
-        if ($this->mhs->updateMahasiswa($data,$id)>0){
+        if ($this->mdosen->updateDosen($data,$id)>0){
             $this->response([
                 'status' => true,
-                'message' => 'Mahasiswa telah diperbarui'
+                'message' => 'Dosen telah diperbarui'
             ], REST_Controller::HTTP_NO_CONTENT);
         } else {
             $this->response([
                 'status' => false,
-                'message' => 'gagal memperbarui Mahasiswa'
+                'message' => 'gagal memperbarui Dosen'
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
     }
