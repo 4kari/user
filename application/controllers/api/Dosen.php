@@ -10,11 +10,11 @@ class Dosen extends REST_Controller{
         $this->load->model('Dosen_model','mdosen');
     }
     public function index_get(){
-        $id = $this->get('id');
-        if ($id == null) {
+        $nip = $this->get('nip');
+        if ($nip == null) {
             $Dosen = $this->mdosen->getDosen();
         } else{
-            $Dosen = $this->mdosen->getDosen($id);
+            $Dosen = $this->mdosen->getDosen($nip);
         }
         if ($Dosen){
             $this->response([
@@ -30,14 +30,14 @@ class Dosen extends REST_Controller{
     }
 
     public function index_delete(){
-        $id = $this->delete('id');
-        if ($id == null){
+        $nip = $this->delete('nip');
+        if ($nip == null){
             $this->response([
                 'status' => false,
-                'message' => 'tambahkan id'
+                'message' => 'tambahkan nip'
             ], REST_Controller::HTTP_BAD_REQUEST);
         } else {
-            if ($this->mdosen->deleteDosen($id)>0){
+            if ($this->mdosen->deleteDosen($nip)>0){
                 //ok
                 $this->response([
                     'status' => true,
@@ -54,12 +54,17 @@ class Dosen extends REST_Controller{
     }
     public function index_post(){
         $data=[
-            'id_post' => $this->post('id_post'),
-            'waktu' => $this->post('waktu'),
-            'pesan' => $this->post('pesan'),
-            'tipe' => $this->post('tipe'),
-            'pengirim' => $this->post('pengirim'),
-            'file' => $this->post('file')
+            'nip' => $this->post('nip'),
+            'nama' => $this->post('nama'),
+            'jenis_kelamin' => $this->post('jenis_kelamin'),
+            'alamat' => $this->post('alamat'),
+            'tanggal_lahir' => $this->post('tanggal_lahir'),
+            'no_hp' => $this->post('no_hp'),
+            'gambar' => $this->post('gambar'),
+            'username' => $this->post('username'),
+            'prodi' => $this->post('prodi'),
+            'email' => $this->post('email'),
+            'tanggal_buat' => $this->post('tanggal buat')
         ];
         
         if ($this->mdosen->createDosen($data)>0){
@@ -75,17 +80,22 @@ class Dosen extends REST_Controller{
         }
     }
     public function index_put(){
-        $id=$this->put('id');
+        $nip=$this->put('nip');
         $data=[
-            'id_post' => $this->put('id_post'),
-            'waktu' => $this->put('waktu'),
-            'pesan' => $this->put('pesan'),
-            'tipe' => $this->put('tipe'),
-            'pengirim' => $this->put('pengirim'),
-            'file' => $this->put('file')
+            'nip' => $this->put('nipbaru'),
+            'nama' => $this->put('nama'),
+            'jenis_kelamin' => $this->put('jenis_kelamin'),
+            'alamat' => $this->put('alamat'),
+            'tanggal_lahir' => $this->put('tanggal_lahir'),
+            'no_hp' => $this->put('no_hp'),
+            'gambar' => $this->put('gambar'),
+            'username' => $this->put('username'),
+            'prodi' => $this->put('prodi'),
+            'email' => $this->put('email'),
+            'tanggal_buat' => $this->put('tanggal buat')
         ];
 
-        if ($this->mdosen->updateDosen($data,$id)>0){
+        if ($this->mdosen->updateDosen($data,$nip)>0){
             $this->response([
                 'status' => true,
                 'message' => 'Dosen telah diperbarui'

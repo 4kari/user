@@ -10,11 +10,11 @@ class Prodi extends REST_Controller{
         $this->load->model('Prodi_model','mprodi');
     }
     public function index_get(){
-        $id = $this->get('id');
-        if ($id == null) {
+        $kode_prodi = $this->get('kode_prodi');
+        if ($kode_prodi == null) {
             $Prodi = $this->mprodi->getProdi();
         } else{
-            $Prodi = $this->mprodi->getProdi($id);
+            $Prodi = $this->mprodi->getProdi($kode_prodi);
         }
         if ($Prodi){
             $this->response([
@@ -30,14 +30,14 @@ class Prodi extends REST_Controller{
     }
 
     public function index_delete(){
-        $id = $this->delete('id');
-        if ($id == null){
+        $kode_prodi = $this->delete('kode_prodi');
+        if ($kode_prodi == null){
             $this->response([
                 'status' => false,
                 'message' => 'tambahkan id'
             ], REST_Controller::HTTP_BAD_REQUEST);
         } else {
-            if ($this->mprodi->deleteProdi($id)>0){
+            if ($this->mprodi->deleteProdi($kode_prodi)>0){
                 //ok
                 $this->response([
                     'status' => true,
@@ -54,12 +54,9 @@ class Prodi extends REST_Controller{
     }
     public function index_post(){
         $data=[
-            'id_post' => $this->post('id_post'),
-            'waktu' => $this->post('waktu'),
-            'pesan' => $this->post('pesan'),
-            'tipe' => $this->post('tipe'),
-            'pengirim' => $this->post('pengirim'),
-            'file' => $this->post('file')
+            'kode_fakultas' => $this->post('kode_fakultas'),
+            'kode_prodi' => $this->post('kode_prodi'),
+            'prodi' => $this->post('prodi')
         ];
         
         if ($this->mprodi->createProdi($data)>0){
@@ -75,17 +72,14 @@ class Prodi extends REST_Controller{
         }
     }
     public function index_put(){
-        $id=$this->put('id');
+        $kode_prodi=$this->put('kode_prodi');
         $data=[
-            'id_post' => $this->put('id_post'),
-            'waktu' => $this->put('waktu'),
-            'pesan' => $this->put('pesan'),
-            'tipe' => $this->put('tipe'),
-            'pengirim' => $this->put('pengirim'),
-            'file' => $this->put('file')
+            'kode_fakultas' => $this->put('kode_fakultas'),
+            'kode_prodi' => $this->put('kode_prodi'),
+            'prodi' => $this->put('prodi')
         ];
 
-        if ($this->mprodi->updateProdi($data,$id)>0){
+        if ($this->mprodi->updateProdi($data,$kode_prodi)>0){
             $this->response([
                 'status' => true,
                 'message' => 'Prodi telah diperbarui'

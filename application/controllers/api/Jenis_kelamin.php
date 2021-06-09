@@ -54,12 +54,7 @@ class Jenis_kelamin extends REST_Controller{
     }
     public function index_post(){
         $data=[
-            'id_post' => $this->post('id_post'),
-            'waktu' => $this->post('waktu'),
-            'pesan' => $this->post('pesan'),
-            'tipe' => $this->post('tipe'),
-            'pengirim' => $this->post('pengirim'),
-            'file' => $this->post('file')
+            'jenis_kelamin' => $this->post('jenis_kelamin'),
         ];
         
         if ($this->mJK->createJenis_kelamin($data)>0){
@@ -77,12 +72,7 @@ class Jenis_kelamin extends REST_Controller{
     public function index_put(){
         $id=$this->put('id');
         $data=[
-            'id_post' => $this->put('id_post'),
-            'waktu' => $this->put('waktu'),
-            'pesan' => $this->put('pesan'),
-            'tipe' => $this->put('tipe'),
-            'pengirim' => $this->put('pengirim'),
-            'file' => $this->put('file')
+            'jenis_kelamin' => $this->put('jenis_kelamin')
         ];
 
         if ($this->mJK->updateJenis_kelamin($data,$id)>0){

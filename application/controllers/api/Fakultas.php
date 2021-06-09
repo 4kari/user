@@ -10,11 +10,11 @@ class Fakultas extends REST_Controller{
         $this->load->model('Fakultas_model','mfakultas');
     }
     public function index_get(){
-        $id = $this->get('id');
-        if ($id == null) {
+        $kode = $this->get('kode');
+        if ($kode == null) {
             $Fakultas = $this->mfakultas->getFakultas();
         } else{
-            $Fakultas = $this->mfakultas->getFakultas($id);
+            $Fakultas = $this->mfakultas->getFakultas($kode);
         }
         if ($Fakultas){
             $this->response([
@@ -30,14 +30,14 @@ class Fakultas extends REST_Controller{
     }
 
     public function index_delete(){
-        $id = $this->delete('id');
-        if ($id == null){
+        $kode = $this->delete('kode');
+        if ($kode == null){
             $this->response([
                 'status' => false,
-                'message' => 'tambahkan id'
+                'message' => 'tambahkan kode fakultas'
             ], REST_Controller::HTTP_BAD_REQUEST);
         } else {
-            if ($this->mfakultas->deleteFakultas($id)>0){
+            if ($this->mfakultas->deleteFakultas($kode)>0){
                 //ok
                 $this->response([
                     'status' => true,
@@ -47,19 +47,15 @@ class Fakultas extends REST_Controller{
             else{
                 $this->response([
                     'status' => false,
-                    'message' => 'id tidak ditemukan'
+                    'message' => 'kode tidak ditemukan'
                 ], REST_Controller::HTTP_BAD_REQUEST);
             }          
         }
     }
     public function index_post(){
         $data=[
-            'id_post' => $this->post('id_post'),
-            'waktu' => $this->post('waktu'),
-            'pesan' => $this->post('pesan'),
-            'tipe' => $this->post('tipe'),
-            'pengirim' => $this->post('pengirim'),
-            'file' => $this->post('file')
+            'kode_fak' => $this->post('kode'),
+            'fakultas' => $this->post('fakultas')
         ];
         
         if ($this->mfakultas->createFakultas($data)>0){
@@ -75,17 +71,13 @@ class Fakultas extends REST_Controller{
         }
     }
     public function index_put(){
-        $id=$this->put('id');
+        $kode=$this->put('kode');
         $data=[
-            'id_post' => $this->put('id_post'),
-            'waktu' => $this->put('waktu'),
-            'pesan' => $this->put('pesan'),
-            'tipe' => $this->put('tipe'),
-            'pengirim' => $this->put('pengirim'),
-            'file' => $this->put('file')
+            'kode_fak' => $this->put('kode'),
+            'fakultas' => $this->put('fakultas')
         ];
 
-        if ($this->mfakultas->updateFakultas($data,$id)>0){
+        if ($this->mfakultas->updateFakultas($data,$kode)>0){
             $this->response([
                 'status' => true,
                 'message' => 'Fakultas telah diperbarui'

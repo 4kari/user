@@ -54,12 +54,17 @@ class Mahasiswa extends REST_Controller{
     }
     public function index_post(){
         $data=[
-            'id_post' => $this->post('id_post'),
-            'waktu' => $this->post('waktu'),
-            'pesan' => $this->post('pesan'),
-            'tipe' => $this->post('tipe'),
-            'pengirim' => $this->post('pengirim'),
-            'file' => $this->post('file')
+            'nim' => $this->post('nim'),
+            'nama' => $this->post('nama'),
+            'username' => $this->post('username'),
+            'email' => $this->post('email'),
+            'prodi' => $this->post('prodi'),
+            'jenis_kelamin' => $this->post('jenis_kelamin'),
+            'alamat' => $this->post('alamat'),
+            'no_hp' => $this->post('no_hp'),
+            'gambar' => $this->post('gambar'),
+            'tanggal_lahir' => $this->post('tanggal_lahir'),
+            'tanggal_buat' => $this->post('tanggal_buat')
         ];
         
         if ($this->mhs->createMahasiswa($data)>0){
@@ -75,14 +80,19 @@ class Mahasiswa extends REST_Controller{
         }
     }
     public function index_put(){
-        $id=$this->put('id');
+        $id=$this->put('nim');
         $data=[
-            'id_post' => $this->put('id_post'),
-            'waktu' => $this->put('waktu'),
-            'pesan' => $this->put('pesan'),
-            'tipe' => $this->put('tipe'),
-            'pengirim' => $this->put('pengirim'),
-            'file' => $this->put('file')
+            'nim' => $this->put('nim'),
+            'nama' => $this->put('nama'),
+            'username' => $this->put('username'),
+            'email' => $this->put('email'),
+            'prodi' => $this->put('prodi'),
+            'jenis_kelamin' => $this->put('jenis_kelamin'),
+            'alamat' => $this->put('alamat'),
+            'no_hp' => $this->put('no_hp'),
+            'gambar' => $this->put('gambar'),
+            'tanggal_lahir' => $this->put('tanggal_lahir'),
+            'tanggal_buat' => $this->put('tanggal_buat')
         ];
 
         if ($this->mhs->updateMahasiswa($data,$id)>0){

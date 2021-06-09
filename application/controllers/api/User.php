@@ -10,11 +10,11 @@ class User extends REST_Controller{
         $this->load->model('User_model','muser');
     }
     public function index_get(){
-        $id = $this->get('id');
-        if ($id == null) {
+        $username = $this->get('username');
+        if ($username == null) {
             $User = $this->muser->getUser();
         } else{
-            $User = $this->muser->getUser($id);
+            $User = $this->muser->getUser($username);
         }
         if ($User){
             $this->response([
@@ -30,14 +30,14 @@ class User extends REST_Controller{
     }
 
     public function index_delete(){
-        $id = $this->delete('id');
-        if ($id == null){
+        $username = $this->delete('username');
+        if ($username == null){
             $this->response([
                 'status' => false,
                 'message' => 'tambahkan id'
             ], REST_Controller::HTTP_BAD_REQUEST);
         } else {
-            if ($this->muser->deleteUser($id)>0){
+            if ($this->muser->deleteUser($username)>0){
                 //ok
                 $this->response([
                     'status' => true,
@@ -54,12 +54,9 @@ class User extends REST_Controller{
     }
     public function index_post(){
         $data=[
-            'id_post' => $this->post('id_post'),
-            'waktu' => $this->post('waktu'),
-            'pesan' => $this->post('pesan'),
-            'tipe' => $this->post('tipe'),
-            'pengirim' => $this->post('pengirim'),
-            'file' => $this->post('file')
+            'username' => $this->post('username'),
+            'password' => $this->post('password'),
+            'level' => $this->post('level')
         ];
         
         if ($this->muser->createUser($data)>0){
@@ -75,17 +72,14 @@ class User extends REST_Controller{
         }
     }
     public function index_put(){
-        $id=$this->put('id');
+        $username=$this->put('username');
         $data=[
-            'id_post' => $this->put('id_post'),
-            'waktu' => $this->put('waktu'),
-            'pesan' => $this->put('pesan'),
-            'tipe' => $this->put('tipe'),
-            'pengirim' => $this->put('pengirim'),
-            'file' => $this->put('file')
+            'username' => $this->post('username'),
+            'password' => $this->post('password'),
+            'level' => $this->post('level')
         ];
 
-        if ($this->muser->updateUser($data,$id)>0){
+        if ($this->muser->updateUser($data,$username)>0){
             $this->response([
                 'status' => true,
                 'message' => 'User telah diperbarui'
