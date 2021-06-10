@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2021 at 08:01 PM
+-- Generation Time: Jun 10, 2021 at 07:52 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -62,6 +62,17 @@ CREATE TABLE `fakultas` (
 CREATE TABLE `jenis_kelamin` (
   `id` int(11) NOT NULL,
   `jenis_kelamin` varchar(12) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `level`
+--
+
+CREATE TABLE `level` (
+  `id` int(11) NOT NULL,
+  `ket` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -134,6 +145,12 @@ ALTER TABLE `jenis_kelamin`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `level`
+--
+ALTER TABLE `level`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
@@ -153,7 +170,8 @@ ALTER TABLE `prodi`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`username`);
+  ADD PRIMARY KEY (`username`),
+  ADD KEY `user_level` (`level`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -163,6 +181,12 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `jenis_kelamin`
 --
 ALTER TABLE `jenis_kelamin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `level`
+--
+ALTER TABLE `level`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -190,6 +214,12 @@ ALTER TABLE `mahasiswa`
 --
 ALTER TABLE `prodi`
   ADD CONSTRAINT `fakpro` FOREIGN KEY (`kode_fak`) REFERENCES `fakultas` (`kode_fak`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_level` FOREIGN KEY (`level`) REFERENCES `level` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
