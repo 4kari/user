@@ -64,7 +64,7 @@ class Dosen extends REST_Controller{
             'username' => $this->post('username'),
             'prodi' => $this->post('prodi'),
             'email' => $this->post('email'),
-            'tanggal_buat' => $this->post('tanggal buat')
+            'tanggal_buat' => $this->post('tanggal_buat')
         ];
         
         if ($this->mdosen->createDosen($data)>0){
@@ -92,7 +92,7 @@ class Dosen extends REST_Controller{
             'username' => $this->put('username'),
             'prodi' => $this->put('prodi'),
             'email' => $this->put('email'),
-            'tanggal_buat' => $this->put('tanggal buat')
+            'tanggal_buat' => $this->put('tanggal_buat')
         ];
 
         if ($this->mdosen->updateDosen($data,$nip)>0){

@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2021 at 07:52 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.2
+-- Waktu pembuatan: 13 Jun 2021 pada 16.08
+-- Versi server: 10.4.19-MariaDB
+-- Versi PHP: 7.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dosen`
+-- Struktur dari tabel `dosen`
 --
 
 CREATE TABLE `dosen` (
@@ -42,21 +41,35 @@ CREATE TABLE `dosen` (
   `tanggal_buat` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `dosen`
+--
+
+INSERT INTO `dosen` (`nip`, `nama`, `jenis_kelamin`, `alamat`, `tanggal_lahir`, `no_hp`, `gambar`, `username`, `prodi`, `email`, `tanggal_buat`) VALUES
+('', 'ria rostiani2', 2, 'utm', '0000-00-00', '082319856686', 'ia.jpg', '170411100042', '111', 'meichan12348765@gmail.com', '0000-00-00');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fakultas`
+-- Struktur dari tabel `fakultas`
 --
 
 CREATE TABLE `fakultas` (
-  `kode_fak` varchar(2) NOT NULL,
+  `kode_fakultas` varchar(2) NOT NULL,
   `fakultas` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `fakultas`
+--
+
+INSERT INTO `fakultas` (`kode_fakultas`, `fakultas`) VALUES
+('04', 'Teknik');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jenis_kelamin`
+-- Struktur dari tabel `jenis_kelamin`
 --
 
 CREATE TABLE `jenis_kelamin` (
@@ -64,21 +77,39 @@ CREATE TABLE `jenis_kelamin` (
   `jenis_kelamin` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `jenis_kelamin`
+--
+
+INSERT INTO `jenis_kelamin` (`id`, `jenis_kelamin`) VALUES
+(1, 'laki-laki'),
+(2, 'perempuan');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `level`
+-- Struktur dari tabel `level`
 --
 
 CREATE TABLE `level` (
   `id` int(11) NOT NULL,
-  `ket` varchar(16) NOT NULL
+  `level` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `level`
+--
+
+INSERT INTO `level` (`id`, `level`) VALUES
+(1, 'admin'),
+(2, 'Koordinator'),
+(3, 'Dosen'),
+(4, 'Mahasiswa');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mahasiswa`
+-- Struktur dari tabel `mahasiswa`
 --
 
 CREATE TABLE `mahasiswa` (
@@ -95,22 +126,37 @@ CREATE TABLE `mahasiswa` (
   `tanggal_buat` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `mahasiswa`
+--
+
+INSERT INTO `mahasiswa` (`nim`, `nama`, `username`, `email`, `prodi`, `jenis_kelamin`, `alamat`, `no_hp`, `gambar`, `tanggal_lahir`, `tanggal_buat`) VALUES
+('170411100099', 'Ahmad Khairi Ramadan', '170411100099', 'mypasshidden@gmail.com', '111', 1, 'utm', '085203580638', 'ama.jpg', '0000-00-00', '0000-00-00');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prodi`
+-- Struktur dari tabel `prodi`
 --
 
 CREATE TABLE `prodi` (
-  `kode_fak` varchar(2) NOT NULL,
+  `kode_fakultas` varchar(2) NOT NULL,
   `kode_prodi` varchar(4) NOT NULL,
   `prodi` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `prodi`
+--
+
+INSERT INTO `prodi` (`kode_fakultas`, `kode_prodi`, `prodi`) VALUES
+('04', '111', 'Teknik Informati'),
+('04', '112', 'Sistem Informasi');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -120,11 +166,19 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data untuk tabel `user`
+--
+
+INSERT INTO `user` (`username`, `password`, `level`) VALUES
+('170411100042', '170411100099', 4),
+('170411100099', '170411100099', 4);
+
+--
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `dosen`
+-- Indeks untuk tabel `dosen`
 --
 ALTER TABLE `dosen`
   ADD PRIMARY KEY (`nip`),
@@ -133,25 +187,25 @@ ALTER TABLE `dosen`
   ADD KEY `dosen_prodi` (`prodi`);
 
 --
--- Indexes for table `fakultas`
+-- Indeks untuk tabel `fakultas`
 --
 ALTER TABLE `fakultas`
-  ADD PRIMARY KEY (`kode_fak`);
+  ADD PRIMARY KEY (`kode_fakultas`);
 
 --
--- Indexes for table `jenis_kelamin`
+-- Indeks untuk tabel `jenis_kelamin`
 --
 ALTER TABLE `jenis_kelamin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `level`
+-- Indeks untuk tabel `level`
 --
 ALTER TABLE `level`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `mahasiswa`
+-- Indeks untuk tabel `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
   ADD PRIMARY KEY (`nim`),
@@ -160,41 +214,41 @@ ALTER TABLE `mahasiswa`
   ADD KEY `mhs_jk` (`jenis_kelamin`);
 
 --
--- Indexes for table `prodi`
+-- Indeks untuk tabel `prodi`
 --
 ALTER TABLE `prodi`
   ADD PRIMARY KEY (`kode_prodi`),
-  ADD KEY `fakpro` (`kode_fak`);
+  ADD KEY `fakpro` (`kode_fakultas`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`username`),
   ADD KEY `user_level` (`level`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `jenis_kelamin`
+-- AUTO_INCREMENT untuk tabel `jenis_kelamin`
 --
 ALTER TABLE `jenis_kelamin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `level`
+-- AUTO_INCREMENT untuk tabel `level`
 --
 ALTER TABLE `level`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `dosen`
+-- Ketidakleluasaan untuk tabel `dosen`
 --
 ALTER TABLE `dosen`
   ADD CONSTRAINT `dosen_jk` FOREIGN KEY (`jenis_kelamin`) REFERENCES `jenis_kelamin` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -202,7 +256,7 @@ ALTER TABLE `dosen`
   ADD CONSTRAINT `dosen_user` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `mahasiswa`
+-- Ketidakleluasaan untuk tabel `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
   ADD CONSTRAINT `mhs_jk` FOREIGN KEY (`jenis_kelamin`) REFERENCES `jenis_kelamin` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -210,13 +264,13 @@ ALTER TABLE `mahasiswa`
   ADD CONSTRAINT `mhs_user` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `prodi`
+-- Ketidakleluasaan untuk tabel `prodi`
 --
 ALTER TABLE `prodi`
-  ADD CONSTRAINT `fakpro` FOREIGN KEY (`kode_fak`) REFERENCES `fakultas` (`kode_fak`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fakpro` FOREIGN KEY (`kode_fakultas`) REFERENCES `fakultas` (`kode_fakultas`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `user`
+-- Ketidakleluasaan untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `user_level` FOREIGN KEY (`level`) REFERENCES `level` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

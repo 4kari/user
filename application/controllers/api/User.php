@@ -72,11 +72,11 @@ class User extends REST_Controller{
         }
     }
     public function index_put(){
-        $username=$this->put('username');
+        $username=$this->put('usernamea');
         $data=[
-            'username' => $this->post('username'),
-            'password' => $this->post('password'),
-            'level' => $this->post('level')
+            'username' => $this->put('usernameb'),
+            'password' => $this->put('password'),
+            'level' => $this->put('level')
         ];
 
         if ($this->muser->updateUser($data,$username)>0){

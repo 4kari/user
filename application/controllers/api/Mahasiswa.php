@@ -10,11 +10,11 @@ class Mahasiswa extends REST_Controller{
         $this->load->model('Mahasiswa_model','mhs');
     }
     public function index_get(){
-        $id = $this->get('id');
-        if ($id == null) {
+        $nim = $this->get('nim');
+        if ($nim == null) {
             $Mahasiswa = $this->mhs->getMahasiswa();
         } else{
-            $Mahasiswa = $this->mhs->getMahasiswa($id);
+            $Mahasiswa = $this->mhs->getMahasiswa($nim);
         }
         if ($Mahasiswa){
             $this->response([
@@ -30,14 +30,14 @@ class Mahasiswa extends REST_Controller{
     }
 
     public function index_delete(){
-        $id = $this->delete('id');
-        if ($id == null){
+        $nim = $this->delete('nim');
+        if ($nim == null){
             $this->response([
                 'status' => false,
-                'message' => 'tambahkan id'
+                'message' => 'tambahkan nim'
             ], REST_Controller::HTTP_BAD_REQUEST);
         } else {
-            if ($this->mhs->deleteMahasiswa($id)>0){
+            if ($this->mhs->deleteMahasiswa($nim)>0){
                 //ok
                 $this->response([
                     'status' => true,
@@ -80,7 +80,7 @@ class Mahasiswa extends REST_Controller{
         }
     }
     public function index_put(){
-        $id=$this->put('nim');
+        $nim=$this->put('nim');
         $data=[
             'nim' => $this->put('nim'),
             'nama' => $this->put('nama'),
@@ -95,7 +95,7 @@ class Mahasiswa extends REST_Controller{
             'tanggal_buat' => $this->put('tanggal_buat')
         ];
 
-        if ($this->mhs->updateMahasiswa($data,$id)>0){
+        if ($this->mhs->updateMahasiswa($data,$nim)>0){
             $this->response([
                 'status' => true,
                 'message' => 'Mahasiswa telah diperbarui'

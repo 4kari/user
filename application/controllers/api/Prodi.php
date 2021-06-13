@@ -72,10 +72,10 @@ class Prodi extends REST_Controller{
         }
     }
     public function index_put(){
-        $kode_prodi=$this->put('kode_prodi');
+        $kode_prodi=$this->put('kode_prodia');
         $data=[
             'kode_fakultas' => $this->put('kode_fakultas'),
-            'kode_prodi' => $this->put('kode_prodi'),
+            'kode_prodi' => $this->put('kode_prodib'),
             'prodi' => $this->put('prodi')
         ];
 

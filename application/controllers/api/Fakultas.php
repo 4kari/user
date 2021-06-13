@@ -30,7 +30,7 @@ class Fakultas extends REST_Controller{
     }
 
     public function index_delete(){
-        $kode = $this->delete('kode');
+        $kode = $this->delete('kode_fakultas');
         if ($kode == null){
             $this->response([
                 'status' => false,
@@ -54,7 +54,7 @@ class Fakultas extends REST_Controller{
     }
     public function index_post(){
         $data=[
-            'kode_fak' => $this->post('kode'),
+            'kode_fakultas' => $this->post('kode_fakultas'),
             'fakultas' => $this->post('fakultas')
         ];
         
@@ -71,9 +71,9 @@ class Fakultas extends REST_Controller{
         }
     }
     public function index_put(){
-        $kode=$this->put('kode');
+        $kode=$this->put('kode_fakultas');
         $data=[
-            'kode_fak' => $this->put('kode'),
+            'kode_fakultas' => $this->put('kode_fakultas'),
             'fakultas' => $this->put('fakultas')
         ];
 
