@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Jun 2021 pada 16.08
+-- Waktu pembuatan: 27 Agu 2021 pada 16.17
 -- Versi server: 10.4.19-MariaDB
 -- Versi PHP: 7.4.19
 
@@ -30,14 +30,14 @@ SET time_zone = "+00:00";
 CREATE TABLE `dosen` (
   `nip` varchar(12) NOT NULL,
   `nama` varchar(30) NOT NULL,
-  `jenis_kelamin` int(1) NOT NULL,
-  `alamat` varchar(32) NOT NULL,
-  `tanggal_lahir` date NOT NULL,
-  `no_hp` varchar(13) NOT NULL,
-  `gambar` varchar(32) NOT NULL,
+  `jenis_kelamin` int(1) DEFAULT NULL,
+  `alamat` varchar(32) DEFAULT NULL,
+  `tanggal_lahir` date DEFAULT NULL,
+  `no_hp` varchar(13) DEFAULT NULL,
+  `gambar` varchar(32) DEFAULT NULL,
   `username` varchar(32) NOT NULL,
-  `prodi` varchar(4) NOT NULL,
-  `email` varchar(32) NOT NULL,
+  `prodi` varchar(4) DEFAULT NULL,
+  `email` varchar(32) DEFAULT NULL,
   `tanggal_buat` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -46,7 +46,8 @@ CREATE TABLE `dosen` (
 --
 
 INSERT INTO `dosen` (`nip`, `nama`, `jenis_kelamin`, `alamat`, `tanggal_lahir`, `no_hp`, `gambar`, `username`, `prodi`, `email`, `tanggal_buat`) VALUES
-('', 'ria rostiani2', 2, 'utm', '0000-00-00', '082319856686', 'ia.jpg', '170411100042', '111', 'meichan12348765@gmail.com', '0000-00-00');
+('170411100024', 'Moh Irsad', NULL, NULL, NULL, NULL, NULL, '170411100024', NULL, NULL, '2021-08-08'),
+('170411100042', 'ria rostiani2', 2, 'utm', '0000-00-00', '082319856686', 'ia.jpg', 'dosen', '111', 'meichan12348765@gmail.com', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -116,13 +117,13 @@ CREATE TABLE `mahasiswa` (
   `nim` varchar(12) NOT NULL,
   `nama` varchar(32) NOT NULL,
   `username` varchar(32) NOT NULL,
-  `email` varchar(32) NOT NULL,
+  `email` varchar(32) DEFAULT NULL,
   `prodi` varchar(4) NOT NULL,
-  `jenis_kelamin` int(1) NOT NULL,
-  `alamat` varchar(32) NOT NULL,
-  `no_hp` varchar(13) NOT NULL,
-  `gambar` varchar(32) NOT NULL,
-  `tanggal_lahir` date NOT NULL,
+  `jenis_kelamin` int(1) DEFAULT NULL,
+  `alamat` varchar(32) DEFAULT NULL,
+  `no_hp` varchar(13) DEFAULT NULL,
+  `gambar` varchar(32) DEFAULT NULL,
+  `tanggal_lahir` date DEFAULT NULL,
   `tanggal_buat` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -131,7 +132,8 @@ CREATE TABLE `mahasiswa` (
 --
 
 INSERT INTO `mahasiswa` (`nim`, `nama`, `username`, `email`, `prodi`, `jenis_kelamin`, `alamat`, `no_hp`, `gambar`, `tanggal_lahir`, `tanggal_buat`) VALUES
-('170411100099', 'Ahmad Khairi Ramadan', '170411100099', 'mypasshidden@gmail.com', '111', 1, 'utm', '085203580638', 'ama.jpg', '0000-00-00', '0000-00-00');
+('170411100099', 'Ahmad Khairi Ramadan', '170411100099', 'mypasshidden@gmail.com', '111', 1, 'utm', '085203580638', 'ama.jpg', '0000-00-00', '0000-00-00'),
+('170411100119', 'Syaban', '170411100119', NULL, '111', NULL, NULL, NULL, NULL, NULL, '2021-08-08');
 
 -- --------------------------------------------------------
 
@@ -142,7 +144,7 @@ INSERT INTO `mahasiswa` (`nim`, `nama`, `username`, `email`, `prodi`, `jenis_kel
 CREATE TABLE `prodi` (
   `kode_fakultas` varchar(2) NOT NULL,
   `kode_prodi` varchar(4) NOT NULL,
-  `prodi` varchar(16) NOT NULL
+  `prodi` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -150,7 +152,7 @@ CREATE TABLE `prodi` (
 --
 
 INSERT INTO `prodi` (`kode_fakultas`, `kode_prodi`, `prodi`) VALUES
-('04', '111', 'Teknik Informati'),
+('04', '111', 'Teknik Informatika'),
 ('04', '112', 'Sistem Informasi');
 
 -- --------------------------------------------------------
@@ -170,8 +172,13 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `level`) VALUES
+('170411100024', '170411100024', 3),
 ('170411100042', '170411100099', 4),
-('170411100099', '170411100099', 4);
+('170411100099', '170411100099', 4),
+('170411100119', '170411100119', 4),
+('Admin', 'admin', 1),
+('dosen', 'dosen', 3),
+('koordinator', 'koordinator', 2);
 
 --
 -- Indexes for dumped tables
