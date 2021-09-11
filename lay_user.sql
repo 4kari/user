@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Agu 2021 pada 16.17
+-- Waktu pembuatan: 11 Sep 2021 pada 08.42
 -- Versi server: 10.4.19-MariaDB
 -- Versi PHP: 7.4.19
 
@@ -172,6 +172,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `level`) VALUES
+('170411100001', 'test', 3),
 ('170411100024', '170411100024', 3),
 ('170411100042', '170411100099', 4),
 ('170411100099', '170411100099', 4),
