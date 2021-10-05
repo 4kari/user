@@ -1,11 +1,22 @@
 <?php
 class User_model extends CI_Model{
     public function getUser($username=null){
+        $data=[];
         if ($username === null){
-            return $this->db->get('User')->result_array();
+            $data = $this->db->get('User')->result_array();
         } else {
-            return $this->db->get_where('User', ['username' => $username])->row_array();
+            $data = $this->db->get_where('User', ['username' => $username])->row_array();
         }
+        // $level = json_decode($this->curl->simple_get('http://10.5.12.26/user/api/Level/'),true)['data'];
+        $level = json_decode($this->curl->simple_get('http://localhost/microservice/user/api/Level/'),true)['data'];
+        for ($i=0;$i<count($data);$i++){
+            for ($j=0;$j<count($level);$j++){
+                if ($data[$i]['level']==$level[$j]['id']){
+                    $data[$i]['levelket']=$level[$j]['level'];
+                }
+            }
+        }
+        return $data;
     }
     public function deleteUser($username){
         $this->db->delete('User', ['username' => $username]);
