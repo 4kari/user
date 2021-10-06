@@ -5,7 +5,7 @@ class User_model extends CI_Model{
         if ($username === null){
             $data = $this->db->get('User')->result_array();
         } else {
-            $data = $this->db->get_where('User', ['username' => $username])->row_array();
+            $data = $this->db->get_where('User', ['username' => $username])->result_array();
         }
         // $level = json_decode($this->curl->simple_get('http://10.5.12.26/user/api/Level/'),true)['data'];
         $level = json_decode($this->curl->simple_get('http://localhost/microservice/user/api/Level/'),true)['data'];
