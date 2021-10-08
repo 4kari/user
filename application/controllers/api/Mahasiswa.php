@@ -38,7 +38,6 @@ class Mahasiswa extends REST_Controller{
             ], REST_Controller::HTTP_BAD_REQUEST);
         } else {
             if ($this->mhs->deleteMahasiswa($nim)>0){
-                //ok
                 $this->response([
                     'status' => true,
                     'message' => 'terhapus'
@@ -68,6 +67,7 @@ class Mahasiswa extends REST_Controller{
         ];
         
         if ($this->mhs->createMahasiswa($data)>0){
+            var_dump($this->mhs->createMahasiswa($data));
             $this->response([
                 'status' => true,
                 'message' => 'Mahasiswa baru ditambahkan'
