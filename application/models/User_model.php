@@ -15,6 +15,14 @@ class User_model extends CI_Model{
                     $data[$i]['levelket']=$level[$j]['level'];
                 }
             }
+            if ($data[$i]['level']==3){
+                $data[$i]['data_profil']=$this->db->get_where('dosen',['username' => $data[$i]['username']])->row_array();
+            }
+            elseif ($data[$i]['level']==4){
+                $data[$i]['data_profil']=$this->db->get_where('mahasiswa',['username' => $data[$i]['username']])->row_array();
+            }else{
+                $data[$i]['data_profil']="kosong";
+            }
         }
         return $data;
     }
