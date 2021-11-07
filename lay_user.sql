@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 31 Okt 2021 pada 15.42
+-- Waktu pembuatan: 07 Nov 2021 pada 13.35
 -- Versi server: 10.4.19-MariaDB
 -- Versi PHP: 7.4.19
 
@@ -46,9 +46,8 @@ CREATE TABLE `dosen` (
 --
 
 INSERT INTO `dosen` (`nip`, `nama`, `jenis_kelamin`, `alamat`, `tanggal_lahir`, `no_hp`, `gambar`, `username`, `prodi`, `email`, `tanggal_buat`) VALUES
-('111', 'coba', NULL, NULL, NULL, NULL, NULL, '111', NULL, NULL, '2021-10-06'),
 ('170411100024', 'Moh Irsad', NULL, NULL, NULL, NULL, NULL, '170411100024', NULL, NULL, '2021-08-08'),
-('170411100042', 'ria rostiani2', 2, 'utm', '0000-00-00', '082319856686', 'ia.jpg', 'dosen', '111', 'meichan12348765@gmail.com', '0000-00-00');
+('170411100042', 'ria rostiani2', 2, 'utm', '0000-00-00', '082319856686', 'ia.jpg', '170411100042', '111', 'meichan12348765@gmail.com', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -133,11 +132,9 @@ CREATE TABLE `mahasiswa` (
 --
 
 INSERT INTO `mahasiswa` (`nim`, `nama`, `username`, `email`, `prodi`, `jenis_kelamin`, `alamat`, `no_hp`, `gambar`, `tanggal_lahir`, `tanggal_buat`) VALUES
-('123', 'kosong', '111', NULL, '111', 1, NULL, NULL, NULL, NULL, '0000-00-00'),
 ('170411100099', 'Ahmad Khairi Ramadan', '170411100099', 'mypasshidden@gmail.com', '111', 1, 'utm', '085203580638', 'ama.jpg', '0000-00-00', '0000-00-00'),
 ('170411100119', 'Syaban', '170411100119', NULL, '111', NULL, NULL, NULL, NULL, NULL, '2021-08-08'),
-('170411100122', 'M. Hilhamdi Romadhon', '170411100122', NULL, '111', NULL, NULL, NULL, NULL, NULL, '2021-10-08'),
-('222', 'kosong', '111', NULL, '111', 1, NULL, NULL, NULL, NULL, '0000-00-00');
+('170411100122', 'M. Hilhamdi Romadhon', '170411100122', NULL, '111', NULL, NULL, NULL, NULL, NULL, '2021-10-08');
 
 -- --------------------------------------------------------
 
@@ -176,16 +173,12 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `level`) VALUES
-('111', '111', 3),
-('170411100001', 'test', 3),
 ('170411100024', '170411100024', 3),
 ('170411100042', '170411100042', 3),
 ('170411100099', '170411100099', 4),
-('170411100112', '170411100112', 4),
 ('170411100119', '170411100119', 4),
 ('170411100122', '170411100122', 4),
 ('Admin', 'admin', 1),
-('dosen', 'dosen', 3),
 ('koordinator', 'koordinator', 2);
 
 --
