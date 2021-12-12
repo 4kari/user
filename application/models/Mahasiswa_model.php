@@ -15,22 +15,17 @@ class Mahasiswa_model extends CI_Model{
         $nim = $data['nim'];
         $nama = $data['nama'];
         $prodi=substr($nim, 4, 3);
-        // $Cprodi = json_decode($this->curl->simple_get('http://10.5.12.26/user/api/Prodi/',array('kode_prodi'=>$prodi)),true);
-        $Cprodi = json_decode($this->curl->simple_get('http://localhost/microservice/user/api/Prodi/',array('kode_prodi'=>$prodi)),true);
-        var_dump($Cprodi);
-        if ($Cprodi){
-            echo "jalan";
-            // $user = json_decode($this->curl->simple_get('http://10.5.12.26/user/api/User/',array('username'=>$nim)),true);
-            $user = json_decode($this->curl->simple_get('http://localhost/microservice/user/api/User/',array('username'=>$nim)),true);
+        $Cprodi = $this->db->get_where('Prodi', ['kode_prodi' => $prodi])->row_array();
 
+        if ($Cprodi){
+            $user = $this->db->get_where('user', ['username' => $nim])->row_array();
             if(!$user){
                 $data=[
                     'username'=>$nim,
                     'password'=>$nim,
                     'level'=>"4"
                 ];
-                // json_decode($this->curl->simple_post('http://10.5.12.26/user/api/user/',$data,array(CURLOPT_BUFFERSIZE => 10)),true);
-                json_decode($this->curl->simple_post('http://localhost/microservice/user/api/user/',$data,array(CURLOPT_BUFFERSIZE => 10)),true);
+                $this->db->insert('User',$data);
             }
             $mhs = $this->getMahasiswa($nim);
             if (!$mhs){

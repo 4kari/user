@@ -7,8 +7,7 @@ class User_model extends CI_Model{
         } else {
             $data = $this->db->get_where('User', ['username' => $username])->result_array();
         }
-        // $level = json_decode($this->curl->simple_get('http://10.5.12.26/user/api/Level/'),true)['data'];
-        $level = json_decode($this->curl->simple_get('http://localhost/microservice/user/api/Level/'),true)['data'];
+        $level =  $this->db->get('Level')->result_array();
         for ($i=0;$i<count($data);$i++){
             for ($j=0;$j<count($level);$j++){
                 if ($data[$i]['level']==$level[$j]['id']){

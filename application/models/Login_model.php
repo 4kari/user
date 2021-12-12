@@ -4,8 +4,7 @@ class Login_model extends CI_Model{
         $username = $data['username'];
         $password = $data['password'];
         //hash password
-        $data = json_decode($this->curl->simple_get('http://localhost/microservice/user/api/User/',array('username'=>$username), array(CURLOPT_BUFFERSIZE => 10)),true)['data'][0];
-        // $data = json_decode($this->curl->simple_get('http://10.5.12.26/user/api/User/',array('username'=>$username), array(CURLOPT_BUFFERSIZE => 10)),true)['data'];
+        $user = $this->db->get_where('user', ['username' => $username])->row_array();
         $user=[];
         if ($data){
             if ($data['password']==$password){

@@ -15,8 +15,7 @@ class Dosen_model extends CI_Model{
         $nip = $data['nip'];
         $nama = $data['nama'];
         if($nip && $nama){
-            // $user = json_decode($this->curl->simple_get('http://10.5.12.26/user/api/User/'),true);
-            $user = json_decode($this->curl->simple_get('http://localhost/microservice/user/api/User/',array('username' => $nip)),true);
+            $user = $this->db->get_where('user', ['username' => $nip])->row_array();
             $cek=false;
             for ($i=0;$i<count($user);$i++){
                 if($user['data'][$i]['username']==$nip){
@@ -29,8 +28,7 @@ class Dosen_model extends CI_Model{
                     'password'=>$nip,
                     'level'=>"3"
                 ];
-                // json_decode($this->curl->simple_post('http://10.5.12.26/user/api/user/',$data,array(CURLOPT_BUFFERSIZE => 10)),true);
-                json_decode($this->curl->simple_post('http://localhost/microservice/user/api/user/',$data,array(CURLOPT_BUFFERSIZE => 10)),true);
+                $this->db->insert('User',$data);
             }
             $dosen = $this->getDosen($nip);
             if ($dosen==NULL){
