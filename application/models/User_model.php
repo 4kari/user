@@ -27,6 +27,10 @@ class User_model extends CI_Model{
     }
     public function deleteUser($username){
         $this->db->delete('User', ['username' => $username]);
+        $dosen=$this->db->get_where('dosen',['nip'=>$username]);
+        if($dosen){$this->db->delete('dosen', ['nip' => $username]);}
+        $mhs=$this->db->get_where('mahasiswa',['nim'=>$username]);
+        if($mhs){$this->db->delete('mahasiswa', ['nim' => $username]);}
         return $this->db->affected_rows();
     }
     public function createUser($data){

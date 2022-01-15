@@ -9,6 +9,7 @@ class Dosen_model extends CI_Model{
     }
     public function deleteDosen($nip){
         $this->db->delete('Dosen', ['nip' => $nip]);
+        $this->db->delete('user', ['username' => $nip]);
         return $this->db->affected_rows();
     }
     public function createDosen($data){
@@ -16,13 +17,7 @@ class Dosen_model extends CI_Model{
         $nama = $data['nama'];
         if($nip && $nama){
             $user = $this->db->get_where('user', ['username' => $nip])->row_array();
-            $cek=false;
-            for ($i=0;$i<count($user);$i++){
-                if($user['data'][$i]['username']==$nip){
-                    $cek=true;
-                }
-            }
-            if($cek==false){
+            if($user==false){
                 $data=[
                     'username'=>$nip,
                     'password'=>$nip,
@@ -36,7 +31,8 @@ class Dosen_model extends CI_Model{
                     'nip'=>$nip,
                     'nama'=>$nama,
                     'username'=>$nip,
-                    'tanggal_buat'=> date("Y-m-d",time())
+                    'tanggal_buat'=> date("Y-m-d",time()),
+                    'beban'=>0
                 ];
                 $this->db->insert('Dosen',$data);
             }

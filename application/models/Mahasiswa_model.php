@@ -9,6 +9,7 @@ class Mahasiswa_model extends CI_Model{
     }
     public function deleteMahasiswa($nim){
         $this->db->delete('Mahasiswa', ['nim' => $nim]);
+        $this->db->delete('User', ['username' => $nim]);
         return $this->db->affected_rows();
     }
     public function createMahasiswa($data){

@@ -55,16 +55,7 @@ class Dosen extends REST_Controller{
     public function index_post(){
         $data=[
             'nip' => $this->post('nip'),
-            'nama' => $this->post('nama'),
-            'jenis_kelamin' => $this->post('jenis_kelamin'),
-            'alamat' => $this->post('alamat'),
-            'tanggal_lahir' => $this->post('tanggal_lahir'),
-            'no_hp' => $this->post('no_hp'),
-            'gambar' => $this->post('gambar'),
-            'username' => $this->post('username'),
-            'prodi' => $this->post('prodi'),
-            'email' => $this->post('email'),
-            'tanggal_buat' => $this->post('tanggal_buat')
+            'nama' => $this->post('nama')
         ];
         
         if ($this->mdosen->createDosen($data)>0){
@@ -92,7 +83,8 @@ class Dosen extends REST_Controller{
             'username' => $this->put('username'),
             'prodi' => $this->put('prodi'),
             'email' => $this->put('email'),
-            'tanggal_buat' => $this->put('tanggal_buat')
+            'tanggal_buat' => $this->put('tanggal_buat'),
+            'beban' => $this->put('beban')
         ];
 
         if ($this->mdosen->updateDosen($data,$nip)>0){
