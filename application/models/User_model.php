@@ -41,5 +41,13 @@ class User_model extends CI_Model{
         $this->db->update('User', $data, ['username' => $username]);
         return $this->db->affected_rows();
     }
+    public function updatePassword($data,$username){
+        $user = $this->db->get_where('User', ['username' => $username])->row_array();
+        if($data['passworda']==$user['password']){
+            $user['password']=$data['passwordb'];
+            $this->db->update('User', $user, ['username' => $username]);
+        }
+        return $this->db->affected_rows();
+    }
 }
 ?>
