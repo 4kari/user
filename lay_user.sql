@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 15 Jan 2022 pada 03.26
+-- Waktu pembuatan: 22 Feb 2022 pada 11.17
 -- Versi server: 10.4.19-MariaDB
 -- Versi PHP: 7.4.19
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `dosen` (
   `nip` varchar(18) NOT NULL,
-  `nama` varchar(30) NOT NULL,
+  `nama` varchar(32) NOT NULL,
   `jenis_kelamin` int(1) DEFAULT NULL,
   `alamat` varchar(32) DEFAULT NULL,
   `tanggal_lahir` date DEFAULT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE `dosen` (
 --
 
 INSERT INTO `dosen` (`nip`, `nama`, `jenis_kelamin`, `alamat`, `tanggal_lahir`, `no_hp`, `gambar`, `username`, `prodi`, `email`, `tanggal_buat`, `beban`) VALUES
-('170411100024', 'Moh Irsad', NULL, NULL, NULL, NULL, NULL, '170411100024', NULL, NULL, '2021-08-08', 3),
+('170411100024', 'Moh Irsad', NULL, NULL, NULL, NULL, NULL, '170411100024', NULL, NULL, '2021-08-08', 4),
 ('170411100042', 'ria rostiani2', 2, 'utm', '0000-00-00', '082319856686', 'ia.jpg', '170411100042', '111', 'meichan12348765@gmail.com', '0000-00-00', 3),
 ('197406102008121002', 'Abdullah Basuki Rahmat, S.Si, ', 1, 'kososng', '2021-11-02', '123123', '12312312.jpg', '197406102008121002', '111', '123123@gmail.com', '2021-11-18', 1),
 ('198002232008121001', 'Aeri Rachmad, S.T., M.T.', 1, 'kososng', '2021-11-01', '123123', '12312312.jpg', '198002232008121001', '111', '123123@gmail.com', '2021-11-18', 1),
@@ -137,6 +137,7 @@ CREATE TABLE `mahasiswa` (
 --
 
 INSERT INTO `mahasiswa` (`nim`, `nama`, `username`, `email`, `prodi`, `jenis_kelamin`, `alamat`, `no_hp`, `gambar`, `tanggal_lahir`, `tanggal_buat`) VALUES
+('170411100001', 'mahasiswa baru', '170411100001', NULL, '111', NULL, NULL, NULL, NULL, NULL, '2022-02-22'),
 ('170411100099', 'Ahmad Khairi Ramadan', '170411100099', 'mypasshidden@gmail.com', '111', 1, 'utm', '085203580638', 'ama.jpg', '0000-00-00', '0000-00-00'),
 ('170411100106', 'Fairozi Hanif Darmawan', '170411100106', NULL, '111', NULL, NULL, NULL, NULL, NULL, '2021-12-12'),
 ('170411100119', 'Syaban', '170411100119', NULL, '111', NULL, NULL, NULL, NULL, NULL, '2021-08-08'),
@@ -179,7 +180,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `level`) VALUES
-('123', '123', 3),
+('170411100001', '170411100001', 4),
 ('170411100024', '170411100024', 3),
 ('170411100042', '170411100042', 3),
 ('170411100099', '170411100099', 4),
